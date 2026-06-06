@@ -1,0 +1,14 @@
+# Enable Rewrite Engine
+RewriteEngine On
+RewriteBase /sparkx1/
+
+# 1. Map extensionless URLs to .php files
+# If filename.php exists and it's NOT a directory, rewrite to it.
+# Existing directories with index.php (like /user/dashboard) are handled by Apache automatically.
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^([^\.]+)$ $1.php [NC,L]
+
+# 2. Prevent directory listing
+Options -Indexes

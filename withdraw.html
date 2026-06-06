@@ -1,0 +1,3662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="csrf-token" content="XOtZWocKBTv9B8Nh65Uu44Di75AdBWdt2ftrm31g">
+<meta name="user-id" content="997">
+<title>Sparkx</title>
+<!-- Favicon -->
+
+<!-- Apple Touch Icons for iOS -->
+
+<!-- Mobile Web App Meta Tags -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Spark X">
+<link rel="stylesheet" href="https://sparkx1.pro/assets/dashboard/css/dashboard.css">
+
+<link rel="stylesheet" href="https://sparkx1.pro/assets/dashboard/css/dashboard.css">
+<style>
+    .withdraw-page {
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    /* Withdraw Header */
+    .withdraw-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .withdraw-title {
+        font-size: 2.75rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        margin: 0;
+        letter-spacing: -1.5px;
+        line-height: 1.2;
+        background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary-color) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    /* Main Content Grid */
+    .withdraw-content-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Left Panel - Withdraw Form */
+    .withdraw-form-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .withdraw-section-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 2.5rem;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .withdraw-section-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+        border-color: rgba(146, 30, 255, 0.3);
+    }
+
+    .withdraw-section-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #FF00FF 0%, #FF00FF 50%, #FF00FF 100%);
+        background-size: 200% 100%;
+        animation: shimmer 3s linear infinite;
+        box-shadow: 0 2px 10px rgba(146, 30, 255, 0.3);
+    }
+
+    @keyframes shimmer {
+        0% { background-position: 200% 0; }
+        100% { background-position: -200% 0; }
+    }
+
+    .withdraw-section-title {
+        font-size: 1.375rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 1.75rem 0;
+        letter-spacing: -0.3px;
+        line-height: 1.3;
+    }
+
+    /* Pending Withdrawal Warning */
+    .pending-withdrawal-warning {
+        background: rgba(255, 178, 30, 0.1);
+        border: 2px solid rgba(146, 30, 255, 0.3);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .pending-withdrawal-warning-content {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .pending-withdrawal-icon {
+        font-size: 1.5rem;
+        color: #FF00FF;
+        flex-shrink: 0;
+        margin-top: 0.125rem;
+    }
+
+    .pending-withdrawal-text {
+        flex: 1;
+    }
+
+    .pending-withdrawal-title {
+        margin: 0 0 0.5rem 0;
+        color: var(--text-primary);
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.3;
+    }
+
+    .pending-withdrawal-message {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+        line-height: 1.5;
+    }
+
+    /* Payment Methods Grid */
+    .withdraw-payment-methods {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .withdraw-payment-method {
+        background: rgba(214, 170, 255, 0.3);
+        border: 2px solid rgba(146, 30, 255, 0.2);
+        border-radius: 16px;
+        padding: 1.75rem 1.5rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .withdraw-payment-method::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(146, 30, 255, 0.3), transparent);
+        transition: left 0.5s;
+    }
+
+    .withdraw-payment-method:hover {
+        background: rgba(196, 147, 242, 0.12)!important;
+        border-color: var(--primary-color);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(146, 30, 255, 0.3);
+    }
+
+    .withdraw-payment-method:hover::before {
+        left: 100%;
+    }
+
+    .withdraw-payment-method.active {
+        background: rgba(193, 138, 244, 0.3);
+        border-color: #ffffff;
+        border-width: 2px;
+        box-shadow: 0 0 25px rgba(146, 30, 255, 0.5);
+        transform: scale(1.02);
+    }
+
+    .withdraw-payment-icon {
+        width: 64px;
+        height: 64px;
+        margin: 0 auto 1.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 14px;
+        font-size: 2.125rem;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .withdraw-payment-icon img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        padding: 0.5rem;
+    }
+
+    .withdraw-payment-method:hover .withdraw-payment-icon {
+        transform: scale(1.1) rotate(5deg);
+    }
+
+    .withdraw-payment-method.active .withdraw-payment-icon {
+        transform: scale(1.15);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    }
+
+    .withdraw-payment-name {
+        font-size: 1.0625rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+        letter-spacing: -0.2px;
+        transition: color 0.3s ease;
+    }
+
+    .withdraw-payment-method:hover .withdraw-payment-name {
+        color: var(--primary-color);
+    }
+
+    /* Withdraw Amount Section */
+    .withdraw-section-card.withdraw-amount-section {
+        display: none !important;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .withdraw-section-card.withdraw-amount-section.show {
+        display: block !important;
+        opacity: 1;
+    }
+
+    /* Preset Amount Buttons */
+    .withdraw-preset-amounts {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.875rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .withdraw-preset-btn {
+        padding: 1rem 1.25rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(146, 30, 255, 0.3);
+        border-radius: 12px;
+        color: var(--text-primary);
+        font-size: 1.0625rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-align: center;
+    }
+
+    .withdraw-preset-btn:hover {
+        background: rgba(255, 178, 30, 0.1);
+        border-color: rgba(146, 30, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(146, 30, 255, 0.3);
+    }
+
+    .withdraw-preset-btn.active {
+        background: rgba(146, 30, 255, 0.3);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+        box-shadow: 0 0 20px rgba(146, 30, 255, 0.3);
+    }
+
+    /* Withdraw Amount Input */
+    .withdraw-amount-wrapper {
+        position: relative;
+        margin-bottom: 1.25rem;
+    }
+
+    .withdraw-amount-input {
+        width: 100%;
+        padding: 1.375rem 1.5rem 1.375rem 3.5rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: 2px solid rgba(255, 178, 30, 0.25);
+        border-radius: 14px;
+        color: var(--text-primary);
+        font-size: 1.375rem;
+        font-weight: 700;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .withdraw-amount-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px rgba(146, 30, 255, 0.3), 0 6px 25px rgba(146, 30, 255, 0.3);
+        background: rgb(255, 255, 255);
+        transform: translateY(-1px);
+    }
+
+    .withdraw-amount-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .withdraw-amount-symbol {
+        position: absolute;
+        left: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--primary-color);
+        font-size: 1.375rem;
+        font-weight: 700;
+        text-shadow: 0 2px 8px rgba(146, 30, 255, 0.3);
+        z-index: 1;
+    }
+
+    /* PKR Amount Display */
+    .withdraw-pkr-amount {
+        margin-top: 0.75rem;
+        padding: 0.2rem 1.25rem;
+        background: rgba(255, 255, 255, 0.6);
+        border-radius: 10px;
+        border:1px solid rgba(146, 30, 255, 0.3);
+        text-align: center;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    .withdraw-pkr-amount #withdraw-pkr-amount-text {
+        color: var(--text-primary);
+        font-size: 1.125rem;
+        font-weight: 500;
+        letter-spacing: 0.2px;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-5px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .withdraw-continue-btn {
+        width: 100%;
+        padding: 1.375rem 1.5rem;
+        background: linear-gradient(135deg, #FF00FF 0%, #FF00FF 100%);
+        border: none;
+        border-radius: 14px;
+        color: white;
+        font-size: 1.1875rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-top: 1.25rem;
+        box-shadow: 0 4px 20px rgba(146, 30, 255, 0.35);
+        position: relative;
+        overflow: hidden;
+        letter-spacing: 0.3px;
+    }
+
+    .withdraw-continue-btn::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        transform: translate(-50%, -50%);
+        transition: width 0.6s, height 0.6s;
+    }
+
+    .withdraw-continue-btn:hover::before {
+        width: 300px;
+        height: 300px;
+    }
+
+    .withdraw-continue-btn:hover:not(:disabled) {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 35px rgba(146, 30, 255, 0.55);
+    }
+
+    .withdraw-continue-btn:active {
+        transform: translateY(-1px);
+    }
+
+    .withdraw-continue-btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    /* Right Panel - History */
+    .withdraw-info-section {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    /* Withdrawal Instructions */
+    .withdraw-instructions-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .withdraw-instruction-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        color: var(--text-secondary);
+        font-size: 0.96875rem;
+        line-height: 1.45;
+        padding: 0.75rem 0;
+        transition: color 0.3s ease;
+    }
+
+    .withdraw-instruction-item:hover {
+        color: var(--text-primary);
+    }
+
+    .withdraw-instruction-bullet {
+        width: 10px;
+        height: 10px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        margin-top: 0.625rem;
+        flex-shrink: 0;
+        box-shadow: 0 0 12px rgba(146, 30, 255, 0.6);
+        transition: all 0.3s ease;
+    }
+
+    .withdraw-instruction-item:hover .withdraw-instruction-bullet {
+        transform: scale(1.2);
+        box-shadow: 0 0 16px rgba(146, 30, 255, 0.8);
+    }
+
+    /* Withdrawal History */
+    .withdraw-history-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .withdraw-history-filters {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .withdraw-filter-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: rgba(146, 30, 255, 0.1);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        color: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .withdraw-filter-icon:hover {
+        background: rgba(146, 30, 255, 0.2);
+        border-color: var(--primary-color);
+    }
+
+    .withdraw-filter-dropdown {
+        padding: 0.625rem 1rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        border-radius: 8px;
+        color: #000000;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .withdraw-filter-dropdown:hover {
+        background: rgba(146, 30, 255, 0.2);
+        border-color: var(--primary-color);
+    }
+
+    .withdraw-filter-dropdown option {
+        color: #ffffff;
+        background: #101828;
+    }
+
+    .withdraw-transactions-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .withdraw-transaction-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin-bottom: 1.25rem;
+        display: flex;
+        align-items: flex-start;
+        gap: 1.25rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+
+    .withdraw-transaction-card:hover {
+        background: var(--card-bg-hover);
+        border-color: rgba(146, 30, 255, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .withdraw-transaction-icon-wrapper {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+        background: rgba(146, 30, 255, 0.12);
+        border: 1px solid rgba(146, 30, 255, 0.25);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(146, 30, 255, 0.15);
+    }
+
+    .withdraw-transaction-card:hover .withdraw-transaction-icon-wrapper {
+        background: rgba(146, 30, 255, 0.18);
+        border-color: rgba(146, 30, 255, 0.4);
+        transform: scale(1.05);
+    }
+
+    .withdraw-transaction-icon-wrapper i {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+    }
+
+    .withdraw-transaction-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .withdraw-transaction-title {
+        font-size: 1.125rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0 0 0.5rem 0;
+    }
+
+    .withdraw-transaction-date {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin: 0;
+    }
+
+    .withdraw-transaction-right {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+        flex-shrink: 0;
+    }
+
+    .withdraw-transaction-amount {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .withdraw-transaction-status {
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.25rem 0.75rem;
+        border-radius: 6px;
+    }
+
+    .withdraw-transaction-status.pending {
+        background: rgba(255, 178, 30, 0.1);
+        color: var(--primary-color);
+    }
+
+    .withdraw-transaction-status.approved {
+        background: rgba(76, 175, 80, 0.1);
+        color: #4CAF50;
+    }
+
+    .withdraw-transaction-status.rejected {
+        background: rgba(255, 68, 68, 0.1);
+        color: #FF4444;
+    }
+
+    .withdraw-transaction-amount.amount-success {
+        color: #4CAF50;
+    }
+
+    .withdraw-transaction-amount.amount-warning {
+        color: var(--primary-color);
+    }
+
+    .withdraw-transaction-amount.amount-danger {
+        color: #FF4444;
+    }
+
+    .withdraw-transaction-icon-wrapper.icon-approved {
+        background: rgba(76, 175, 80, 0.12);
+        border-color: rgba(76, 175, 80, 0.25);
+    }
+
+    .withdraw-transaction-icon-wrapper.icon-approved i {
+        color: #4CAF50;
+    }
+
+    .withdraw-transaction-icon-wrapper.icon-pending {
+        background: rgba(146, 30, 255, 0.12);
+        border-color: rgba(146, 30, 255, 0.3);
+    }
+
+    .withdraw-transaction-icon-wrapper.icon-pending i {
+        color: var(--primary-color);
+    }
+
+    .withdraw-transaction-icon-wrapper.icon-rejected {
+        background: rgba(255, 68, 68, 0.12);
+        border-color: rgba(255, 68, 68, 0.25);
+    }
+
+    .withdraw-transaction-icon-wrapper.icon-rejected i {
+        color: #FF4444;
+    }
+
+    .withdraw-history-empty {
+        text-align: center;
+        padding: 3rem 2rem;
+        color: var(--text-muted);
+        font-size: 1rem;
+        display: none;
+    }
+
+    .withdraw-history-empty.show {
+        display: block;
+    }
+
+    /* Search bar for mobile */
+    .withdraw-search-bar {
+        display: none;
+    }
+
+    .withdraw-search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .withdraw-search-input {
+        flex: 1;
+        padding: 0.875rem 1rem 0.875rem 3rem;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(34, 34, 33, 0.2);
+        border-radius: 10px;
+        color: var(--text-primary);
+        font-size: 0.9375rem;
+        transition: var(--transition);
+    }
+
+    .withdraw-search-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px rgba(146, 30, 255, 0.3);
+    }
+
+    .withdraw-search-input::placeholder {
+        color: var(--text-muted);
+    }
+
+    .withdraw-search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        font-size: 1rem;
+    }
+
+    .withdraw-search-filter-btn {
+        width: 44px;
+        height: 44px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        color: var(--text-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+        flex-shrink: 0;
+    }
+
+    .withdraw-search-filter-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--primary-color);
+        color: var(--primary-color);
+    }
+
+    .withdraw-search-filter-btn i {
+        font-size: 1rem;
+    }
+
+    /* Advanced Search Modal */
+    .withdraw-advance-search-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.7);
+        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        backdrop-filter: blur(5px);
+    }
+
+    .withdraw-advance-search-modal.show {
+        display: flex;
+    }
+
+    .withdraw-advance-search-content {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2rem;
+        width: 100%;
+        max-width: 500px;
+        position: relative;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--card-border);
+    }
+
+    .withdraw-advance-search-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .withdraw-advance-search-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .withdraw-advance-search-close {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+            background: rgba(146, 30, 255, 0.3);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .withdraw-advance-search-close:hover {
+        background: rgba(146, 30, 255, 0.2);
+        border-color: var(--primary-color);
+    }
+
+    .withdraw-advance-search-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .withdraw-advance-search-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .withdraw-advance-search-label {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+
+    .withdraw-advance-search-date-wrapper {
+        position: relative;
+    }
+
+    .withdraw-advance-search-date-input {
+        width: 100%;
+        padding: 0.875rem 1rem 0.875rem 3rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        border-radius: 10px;
+        color: var(--text-primary);
+        font-size: 0.9375rem;
+        transition: var(--transition);
+    }
+
+    .withdraw-advance-search-date-input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px rgba(146, 30, 255, 0.3);
+    }
+
+    .withdraw-advance-search-date-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        font-size: 1rem;
+    }
+
+    .withdraw-advance-search-sort-wrapper {
+        position: relative;
+    }
+
+    .withdraw-advance-search-sort {
+        width: 100%;
+        padding: 0.875rem 1rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        border-radius: 10px;
+        color: #000000;
+        font-size: 0.9375rem;
+        cursor: pointer;
+        transition: var(--transition);
+        appearance: none;
+        padding-right: 3rem;
+    }
+
+    .withdraw-advance-search-sort:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 15px rgba(146, 30, 255, 0.3);
+    }
+
+    .withdraw-advance-search-sort option {
+        color: #000000;
+        background: white;
+    }
+
+    .withdraw-advance-search-buttons {
+        display: flex;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    .withdraw-advance-search-apply {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        background: linear-gradient(135deg, #FF00FF 0%, #FF1493 100%);
+        border: none;
+        border-radius: 12px;
+        color: white;
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .withdraw-advance-search-apply:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(255, 0, 255, 0.4);
+    }
+
+    .withdraw-advance-search-clear {
+        flex: 1;
+        padding: 1rem 1.5rem;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        border-radius: 12px;
+        color: var(--text-primary);
+        font-size: 1rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+
+    .withdraw-advance-search-clear:hover {
+        background: rgba(146, 30, 255, 0.1);
+        border-color: var(--primary-color);
+    }
+
+    @media (max-width: 768px) {
+        .withdraw-search-bar {
+            display: block;
+        }
+
+        .withdraw-history-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .withdraw-history-filters {
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .withdraw-filter-icon {
+            display: none;
+        }
+
+        .withdraw-filter-dropdown {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(255, 178, 30, 0.2);
+            border-radius: 10px;
+            color: #000000;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23ffffff' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            padding-right: 3rem;
+        }
+
+        .withdraw-filter-dropdown:hover {
+            background-color: rgba(146, 30, 255, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .withdraw-filter-dropdown:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(146, 30, 255, 0.3);
+        }
+
+        .withdraw-filter-dropdown option {
+            color: #000000;
+            background: #ffffff;
+        }
+
+        .withdraw-advance-search-content {
+            padding: 1.5rem;
+            border-radius: 16px;
+        }
+
+        .withdraw-advance-search-title {
+            font-size: 1.25rem;
+        }
+
+        .withdraw-advance-search-buttons {
+            flex-direction: column;
+        }
+    }
+
+    .withdraw-view-proof-btn {
+        width: auto;
+        padding: 0.375rem 1rem;
+        background: rgba(146, 30, 255, 0.1);
+        border: 1px solid rgba(146, 30, 255, 0.3);
+        border-radius: 8px;
+        color: var(--primary-color);
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        margin-top: 0.25rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        align-self: flex-end;
+    }
+
+    .withdraw-view-proof-btn i {
+        font-size: 1rem;
+    }
+
+    .withdraw-view-proof-btn:hover {
+        background: rgba(146, 30, 255, 0.2);
+        border-color: var(--primary-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(146, 30, 255, 0.3);
+    }
+
+    /* Proof Image Modal */
+    .proof-modal {
+        display: none;
+        position: fixed;
+        z-index: 10000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.9);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
+        animation: fadeIn 0.3s ease;
+    }
+
+    .proof-modal.show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .proof-modal-content {
+        position: relative;
+        max-width: 90%;
+        max-height: 90%;
+        margin: auto;
+        animation: zoomIn 0.3s ease;
+    }
+
+    @keyframes zoomIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    .proof-modal-image {
+        width: 100%;
+        height: auto;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .proof-modal-close {
+        position: absolute;
+        top: -40px;
+        right: 0;
+        color: #fff;
+        font-size: 2rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.1);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .proof-modal-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: var(--primary-color);
+        transform: rotate(90deg);
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .withdraw-header {
+            display: none;
+        }
+
+        .withdraw-content-grid {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+        }
+
+        .withdraw-form-section {
+            gap: 1.25rem;
+        }
+
+        .withdraw-payment-methods {
+            grid-template-columns: 1fr;
+            gap: 0.875rem;
+        }
+
+        .withdraw-payment-method {
+            padding: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-align: left;
+        }
+
+        .withdraw-payment-icon {
+            width: 56px;
+            height: 56px;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .withdraw-payment-name {
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .withdraw-section-card {
+            padding: 1.5rem;
+        }
+
+        .withdraw-section-title {
+            font-size: 1.125rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .withdraw-preset-amounts {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .withdraw-preset-btn {
+            padding: 0.875rem 1rem;
+            font-size: 0.9375rem;
+        }
+
+        .withdraw-amount-input {
+            padding: 1rem 1.25rem 1rem 2.5rem;
+            font-size: 1.125rem;
+        }
+
+        .withdraw-amount-symbol {
+            left: 1.25rem;
+            font-size: 1.125rem;
+        }
+
+        .withdraw-continue-btn {
+            padding: 1rem;
+            font-size: 1rem;
+            margin-top: 0.75rem;
+        }
+
+        .withdraw-info-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        /* Mobile withdrawal instructions enhanced styling */
+        .withdraw-instructions-list {
+            gap: 0.1rem;
+        }
+
+        .withdraw-instruction-item {
+            font-size: 0.9375rem;
+            line-height: 1.45;
+        }
+
+        .withdraw-instruction-bullet {
+            width: 10px;
+            height: 10px;
+            margin-top: 0.375rem;
+            box-shadow: 0 0 12px #FF00FFcc;
+        }
+
+        .withdraw-info-section .withdraw-section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .pending-withdrawal-warning {
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+            border-radius: 12px;
+        }
+
+        .pending-withdrawal-warning-content {
+            gap: 0.875rem;
+        }
+
+        .pending-withdrawal-icon {
+            font-size: 1.25rem;
+            margin-top: 0.125rem;
+        }
+
+        .pending-withdrawal-title {
+            font-size: 0.9375rem;
+            margin-bottom: 0.375rem;
+        }
+
+        .pending-withdrawal-message {
+            font-size: 0.8125rem;
+            line-height: 1.4;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .withdraw-page {
+            padding: 0;
+        }
+
+        .withdraw-section-card {
+            padding: 1.25rem;
+            border-radius: 12px;
+        }
+
+        .withdraw-section-title {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .withdraw-payment-methods {
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+        }
+
+        .withdraw-payment-method {
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            text-align: left;
+        }
+
+        .withdraw-payment-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0;
+            flex-shrink: 0;
+        }
+
+        .withdraw-payment-name {
+            font-size: 0.875rem;
+            margin: 0;
+        }
+
+        .withdraw-preset-amounts {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.625rem;
+            margin-bottom: 1rem;
+        }
+
+        .withdraw-preset-btn {
+            padding: 0.75rem 0.875rem;
+            font-size: 0.875rem;
+        }
+
+        .withdraw-amount-input {
+            padding: 0.875rem 1rem 0.875rem 2.25rem;
+            font-size: 1rem;
+        }
+
+        .withdraw-amount-symbol {
+            left: 1rem;
+            font-size: 1rem;
+        }
+
+        .withdraw-continue-btn {
+            padding: 0.875rem;
+            font-size: 0.9375rem;
+        }
+    }
+</style>
+<style>
+    /* Mobile-first improvements - Sidebar is hidden on mobile, using bottom nav instead */
+    @media (max-width: 768px) {
+        /* Sidebar is completely hidden on mobile - handled in dashboard.css */
+        
+        /* Header adjustments for mobile */
+        .dashboard-header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .header-content {
+            padding: 1rem;
+        }
+
+        /* Improved mobile typography */
+        body {
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            line-height: 1.3;
+        }
+
+        /* Better spacing for mobile content */
+        .content-area {
+            padding: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        /* Ensure proper scrolling on mobile */
+        .main-content {
+            overflow-x: hidden;
+        }
+    }
+
+    /* Mobile App Interface - Max-width 390px */
+    @media (max-width: 768px) {
+        /* Compact header for mobile app - Blended with page background */
+        .dashboard-header {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: var(--bg-primary) !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-bottom: none !important;
+            box-shadow: none !important;
+        }
+
+        .header-content {
+            padding: 4px 1rem;
+        }
+
+        /* Mobile app typography */
+        body {
+            font-size: 13px;
+            line-height: 1.4;
+        }
+
+        /* Remove padding from content area on mobile app view */
+        .content-area {
+            padding: 0;
+            padding-bottom: 80px; /* Space for bottom nav */
+        }
+
+        /* Ensure no horizontal scroll */
+        .main-content {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        /* Mobile user profile styling */
+        .mobile-user-profile {
+            display: flex !important;
+        }
+        
+        .mobile-user-profile.mobile-user-profile-visible {
+            margin-left: -1.5rem !important;
+        }
+        
+        .mobile-user-avatar {
+            width: 36px;
+            height: 36px;
+        }
+        
+        .mobile-user-name {
+            font-size: 0.8125rem;
+        }
+        
+        .mobile-user-email {
+            font-size: 0.6875rem;
+        }
+
+        .notification-icon {
+            font-size: 1.125rem;
+            padding: 0.5rem;
+        }
+        
+        .header-right {
+            margin-right: -1rem !important;
+        }
+    }
+
+    /* Notification Panel Styles - Desktop */
+    .notification-wrapper {
+        position: relative;
+    }
+
+    .notification-panel {
+        position: absolute;
+        top: calc(100% + 1rem);
+        right: 0;
+        width: 380px;
+        max-height: 500px;
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        z-index: 1000;
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .notification-panel.active {
+        display: flex;
+    }
+
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .notification-panel-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .notification-panel-title {
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin: 0;
+    }
+
+    .notification-panel-body {
+        max-height: 400px;
+        overflow-y: auto;
+        padding: 0.75rem 0;
+    }
+
+    .notification-panel-body::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .notification-panel-body::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .notification-panel-body::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 3px;
+    }
+
+    .notification-item {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 1.5rem;
+        transition: background 0.2s ease;
+        cursor: pointer;
+    }
+
+    .notification-item:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    .notification-icon-wrapper {
+        position: relative;
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .notification-icon-wrapper i {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: rgba(255, 178, 30, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #FFB21E;
+        font-size: 1.125rem;
+    }
+
+    .notification-dot {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 12px;
+        height: 12px;
+        background: #FFB21E;
+        border-radius: 50%;
+        border: 2px solid var(--card-bg);
+    }
+
+    .notification-content {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .notification-greeting {
+        font-size: 0.9375rem;
+        font-weight: 600;
+        color: var(--text-primary);
+        margin-bottom: 0.375rem;
+    }
+
+    .notification-message {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        line-height: 1.5;
+        margin-bottom: 0.5rem;
+    }
+
+    .notification-time {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        opacity: 0.7;
+    }
+
+    .notification-panel-footer {
+        padding: 1rem 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+    }
+
+    .notification-see-all {
+        color: #FFB21E;
+        font-size: 0.875rem;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .notification-see-all:hover {
+        color: #FF8A1D;
+    }
+
+    /* Hide notification panel on mobile */
+    @media (max-width: 768px) {
+        .notification-panel {
+            display: none !important;
+        }
+    }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <!-- Mobile Overlay -->
+        <div class="sidebar-overlay" id="sidebarOverlay"></div>
+        
+        <!-- Left Sidebar -->
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+    <div class="sidebar-content">
+        <!-- Logo -->
+        <div class="sidebar-logo">
+            <div class="logo">
+                <div class="logo-icon-wrapper">
+                    <img class="logo-icon" src="https://sparkx1.pro/assets/dashboard/images/meta/WhatsApp Image 2026-03-22 at 8.04.31 AM.jpeg" alt="logo" style="width: 24px; height: 24px; object-fit: contain;">
+                </div>
+                <span class="logo-text">Spark X</span>
+            </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-nav">
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-th-large"></i>
+                        </span>
+                        <span class="nav-text">Dashboard</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/wallet" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-coins"></i>
+                        </span>
+                        <span class="nav-text">Wallet</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/salary" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                          <i class="fas fa-money-check-alt"></i>
+                        </span>
+                        <span class="nav-text">Salary</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/deposit" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </span>
+                        <span class="nav-text">Deposit</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/plans" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-gem"></i>
+                        </span>
+                        <span class="nav-text">Plans</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/goals" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-bullseye"></i>
+                        </span>
+                        <span class="nav-text">Ranking Rewards</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/referrals" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-user-plus"></i>
+                        </span>
+                        <span class="nav-text">Refer to</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/transactions" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-exchange-alt"></i>
+                        </span>
+                        <span class="nav-text">Transcation History</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/profile" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            
+                            <i class="far fa-user-circle"></i>
+                        </span>
+                        <span class="nav-text">Profile</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://sparkx1.pro/user/dashboard/support" class="nav-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-headset"></i>
+                        </span>
+                        <span class="nav-text">Support</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+                <li class="nav-item logout-item">
+                    <form action="https://sparkx1.pro/logout" method="POST" id="logout-form" style="display: none;">
+                        <input type="hidden" name="_token" value="XOtZWocKBTv9B8Nh65Uu44Di75AdBWdt2ftrm31g" autocomplete="off">                    </form>
+                    <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="nav-link logout-link">
+                        <span class="nav-icon-wrapper">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </span>
+                        <span class="nav-text">Logout</span>
+                        <span class="nav-indicator"></span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</aside>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Top Header -->
+            <div class="dashboard-header">
+    <div class="header-content">
+        <div class="header-left">
+            <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleMobileSidebar(event)">
+                <i class="fas fa-bars"></i>
+            </button>
+            <!-- Header Logo (shown on desktop) -->
+            <div class="header-logo">
+                <div class="logo">
+                    <div class="logo-icon-wrapper">
+                        <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Mining Pickaxe Icon -->
+                            <path d="M12 2L8 6L10 8L6 12L8 14L12 10L16 14L18 12L14 8L16 6L12 2Z" fill="url(#coreMiningGradient)" stroke="#FFB21E" stroke-width="1.5" stroke-linejoin="round"/>
+                            <!-- Mining Blocks -->
+                            <rect x="4" y="16" width="4" height="4" rx="1" fill="#FFB21E" opacity="0.6"/>
+                            <rect x="10" y="18" width="4" height="4" rx="1" fill="#FF8A1D" opacity="0.6"/>
+                            <rect x="16" y="16" width="4" height="4" rx="1" fill="#FFB21E" opacity="0.6"/>
+                            <!-- Glow Effect -->
+                            <circle cx="12" cy="8" r="8" fill="url(#coreMiningGlow)" opacity="0.3"/>
+                            <defs>
+                                <linearGradient id="coreMiningGradient" x1="12" y1="2" x2="12" y2="14" gradientUnits="userSpaceOnUse">
+                                    <stop offset="0%" stop-color="#FFB21E"/>
+                                    <stop offset="100%" stop-color="#FF8A1D"/>
+                                </linearGradient>
+                                <radialGradient id="coreMiningGlow" cx="50%" cy="50%">
+                                    <stop offset="0%" stop-color="#FFB21E" stop-opacity="0.8"/>
+                                    <stop offset="100%" stop-color="#FFB21E" stop-opacity="0"/>
+                                </radialGradient>
+                            </defs>
+                        </svg>
+                    </div>
+                    <span class="logo-text">Spark X</span>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation (shown only on mobile for non-home pages) -->
+            <div class="mobile-nav-header ">
+                <button class="mobile-back-btn" onclick="goBack()">
+                    <svg class="mobile-back-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                <h2 class="mobile-page-title">Withdrawal</h2>
+            </div>
+            
+            <!-- Mobile User Profile (shown only on mobile for home page) -->
+                    </div>
+
+        
+        <div class="header-right" style="color: #712387;">
+            <!-- Notifications -->
+            <div class="notification-wrapper">
+            <div class="notification-icon" id="notificationIcon">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="notificationBadge" style="display: none; background-color: #712387;">0</span>
+            </div>
+            
+            <!-- Notification Dropdown Panel -->
+            <div class="notification-panel" id="notificationPanel">
+                <div class="notification-panel-header" style="background-color: #712387; color: white;">
+                <h3 class="notification-panel-title">Notifications</h3>
+                </div>
+                <div class="notification-panel-body" id="notificationPanelBody">
+                <div class="notification-loading" style="text-align: center; padding: 1rem; color: #712387;">
+                    <i class="fas fa-spinner fa-spin"></i> Loading...
+                </div>
+                </div>
+                <div class="notification-panel-footer">
+                <a href="https://sparkx1.pro/user/dashboard/notifications" class="notification-see-all" style="color: #712387;">See all notification</a>
+                </div>
+            </div>
+            </div>
+
+            <!-- User Profile (shown on desktop) -->
+                        <div class="user-profile">
+                <div class="user-avatar">
+                    <img src="https://sparkx1.pro/assets/dashboard/images/meta/WhatsApp Image 2026-04-02 at 5.12.23 PM.jpeg" alt="User Avatar">
+                </div>
+                <div class="user-info">
+                    <div class="user-name">Testing User</div>
+                    <div class="user-email">online.earning46123@gmail.com</div>
+                </div>
+            </div>
+                    </div>
+    </div>
+</div>
+
+            <!-- Page Content -->
+            <div class="content-area">
+                <div class="withdraw-page">
+    <!-- Error Message Display -->
+    
+    <!-- Withdraw Header -->
+    <div class="withdraw-header">
+        <h1 class="withdraw-title">Get Money</h1>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="withdraw-content-grid">
+        <!-- Left Panel - Withdraw Form -->
+        <div class="withdraw-form-section">
+                        <!-- Payment Method Selection -->
+            <div class="withdraw-section-card" >
+                <h2 class="withdraw-section-title">Selected Payment Method</h2>
+                <div class="withdraw-payment-methods">
+                                            <div class="withdraw-payment-method"
+                             data-method-id="6"
+                             data-method-name="Crypto Wallet"
+                             data-method-type="crypto"
+                             data-min-withdrawal="5.00"
+                             data-max-withdrawal="500.00">
+                            <div class="withdraw-payment-icon">
+                                                                    <img src="https://sparkx1.pro/assets/admin/images/payment-method/g6yypk5aiU8N209KTxqMkNE2j5wUeWtGlKtBCeeu.png" alt="Crypto Wallet">
+                                                            </div>
+                            <p class="withdraw-payment-name">Crypto Wallet</p>
+                        </div>
+                                            <div class="withdraw-payment-method"
+                             data-method-id="3"
+                             data-method-name="Easy Paisa Wallet"
+                             data-method-type="onepay"
+                             data-min-withdrawal="5.00"
+                             data-max-withdrawal="500.00">
+                            <div class="withdraw-payment-icon">
+                                                                    <img src="https://sparkx1.pro/assets/admin/images/payment-method/qN6UJJsGCI0e5il6PfxTiDHvD0IKt2vWfCH74XIr.png" alt="Easy Paisa Wallet">
+                                                            </div>
+                            <p class="withdraw-payment-name">Easy Paisa Wallet</p>
+                        </div>
+                                            <div class="withdraw-payment-method"
+                             data-method-id="4"
+                             data-method-name="Jazz Cash Wallet"
+                             data-method-type="onepay"
+                             data-min-withdrawal="5.00"
+                             data-max-withdrawal="500.00">
+                            <div class="withdraw-payment-icon">
+                                                                    <img src="https://sparkx1.pro/assets/admin/images/payment-method/nJrY0ThQILfw50p7cRYAgoHmtLooVQGnpbzqrgVj.png" alt="Jazz Cash Wallet">
+                                                            </div>
+                            <p class="withdraw-payment-name">Jazz Cash Wallet</p>
+                        </div>
+                                    </div>
+            </div>
+
+            <!-- Withdraw Amount -->
+            <div class="withdraw-section-card withdraw-amount-section" style="display: none;">
+                <h2 class="withdraw-section-title">Withdraw Amount</h2>
+
+                <!-- Preset Amount Buttons -->
+                <div class="withdraw-preset-amounts">
+                    <button type="button" class="withdraw-preset-btn" data-amount="0.6">$0.6</button>
+                    <button type="button" class="withdraw-preset-btn" data-amount="25">$25</button>
+                    <button type="button" class="withdraw-preset-btn" data-amount="50">$50</button>
+                    <button type="button" class="withdraw-preset-btn" data-amount="100">$100</button>
+                    <button type="button" class="withdraw-preset-btn" data-amount="250">$250</button>
+                    <button type="button" class="withdraw-preset-btn" data-amount="500">$500</button>
+                </div>
+
+                <!-- Custom Amount Input -->
+                <div class="withdraw-amount-wrapper">
+                    <span class="withdraw-amount-symbol">$</span>
+                    <input type="number"
+                           class="withdraw-amount-input"
+                           id="withdraw-amount-input"
+                           placeholder="Enter custom amount"
+                           min="0.01"
+                           step="0.01">
+                </div>
+                <!-- PKR Amount Display -->
+                <div class="withdraw-pkr-amount" id="withdraw-pkr-amount" style="display: none;">
+                    <span id="withdraw-pkr-amount-text"></span>
+                </div>
+                                
+                <!-- Insufficient Balance Message -->
+                <div id="withdraw-insufficient-balance-message" style="display: none; background: rgba(255, 68, 68, 0.1); border: 2px solid rgba(255, 68, 68, 0.3); border-radius: 12px; padding: 1rem 1.5rem; margin-bottom: 1rem; color: #FF4444; font-size: 0.875rem;">
+                    <i class="fas fa-exclamation-circle" style="margin-right: 0.5rem;"></i>
+                    <span id="withdraw-insufficient-balance-text"></span>
+                </div>
+                <button class="withdraw-continue-btn" id="withdraw-continue-btn" disabled>
+                    Continue Withdrawal
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Panel - Instructions and History -->
+        <div class="withdraw-info-section">
+            <!-- Withdrawal Instructions -->
+            <div class="withdraw-section-card">
+                <h2 class="withdraw-section-title">Withdrawal Instructions</h2>
+                <ul class="withdraw-instructions-list">
+                    <li class="withdraw-instruction-item">
+                        <span class="withdraw-instruction-bullet"></span>
+                        <span>Please ensure your account details are correct before submitting a withdrawal request.</span>
+                    </li>
+                    <li class="withdraw-instruction-item">
+                        <span class="withdraw-instruction-bullet"></span>
+                        <span>Withdrawal requests are processed within 24-48 hours during business days.</span>
+                    </li>
+                    <li class="withdraw-instruction-item">
+                        <span class="withdraw-instruction-bullet"></span>
+                        <span>Note: Don't cancel the withdrawal request after submission.</span>
+                    </li>
+                    <li class="withdraw-instruction-item">
+                        <span class="withdraw-instruction-bullet"></span>
+                        <span id="withdraw-min-amount-text">Minimum withdrawal amount varies by payment method.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Withdrawal History -->
+            <div class="withdraw-section-card withdraw-history-card">
+                <div class="withdraw-history-header">
+                    <h2 class="withdraw-section-title">Withdrawal History</h2>
+                    <!-- Search Bar (Mobile Only) -->
+                    <div class="withdraw-search-bar">
+                        <div class="withdraw-search-wrapper">
+                            <i class="fas fa-search withdraw-search-icon"></i>
+                            <input type="text" class="withdraw-search-input" id="withdraw-search-input" placeholder="Search transactions...">
+                            <button class="withdraw-search-filter-btn" type="button">
+                                <i class="fas fa-filter"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="withdraw-history-filters">
+                        <div class="withdraw-filter-icon">
+                            <i class="fas fa-filter"></i>
+                        </div>
+                        <select class="withdraw-filter-dropdown" id="withdraw-date-filter">
+                            <option value="3">3 Days</option>
+                            <option value="7">7 Days</option>
+                            <option value="30">30 Days</option>
+                            <option value="all" selected>All Time</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- Transaction Cards -->
+                <div class="withdraw-transactions-list" id="withdraw-transactions-list">
+                                            <!-- Empty state will be shown by CSS -->
+                                    </div>
+                <div class="withdraw-history-empty show" id="withdraw-history-empty">
+                    No withdrawal history found!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Proof Image Modal -->
+<div id="proof-modal" class="proof-modal">
+    <div class="proof-modal-content">
+        <span class="proof-modal-close" onclick="closeProofModal()">&times;</span>
+        <img id="proof-modal-image" class="proof-modal-image" src="" alt="Proof Image">
+    </div>
+</div>
+
+<!-- Advance Search Modal -->
+<div class="withdraw-advance-search-modal" id="withdraw-advance-search-modal">
+    <div class="withdraw-advance-search-content">
+        <div class="withdraw-advance-search-header">
+            <h3 class="withdraw-advance-search-title">Advance Search</h3>
+            <button class="withdraw-advance-search-close" id="withdraw-advance-search-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="withdraw-advance-search-form">
+            <div class="withdraw-advance-search-field">
+                <label class="withdraw-advance-search-label">Select start & end date:</label>
+                <div class="withdraw-advance-search-date-wrapper">
+                    <i class="fas fa-calendar withdraw-advance-search-date-icon"></i>
+                    <input type="text"
+                           class="withdraw-advance-search-date-input"
+                           id="withdraw-date-range-input"
+                           placeholder="dd/mm/yyyy - dd/mm/yyyy"
+                           readonly>
+                    <input type="date"
+                           id="withdraw-start-date"
+                           style="position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none;">
+                    <input type="date"
+                           id="withdraw-end-date"
+                           style="position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none;">
+                </div>
+            </div>
+            <div class="withdraw-advance-search-field">
+                <label class="withdraw-advance-search-label">Sort:</label>
+                <div class="withdraw-advance-search-sort-wrapper">
+                    <select class="withdraw-advance-search-sort" id="withdraw-advance-sort">
+                        <option value="newest">Newest</option>
+                        <option value="oldest">Oldest</option>
+                        <option value="amount-high">Amount: High to Low</option>
+                        <option value="amount-low">Amount: Low to High</option>
+                    </select>
+                </div>
+            </div>
+            <div class="withdraw-advance-search-buttons">
+                <button type="button" class="withdraw-advance-search-apply" id="withdraw-advance-apply">
+                    Apply Filters
+                </button>
+                <button type="button" class="withdraw-advance-search-clear" id="withdraw-advance-clear">
+                    Clear Filter
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let selectedPaymentMethod = null;
+    const conversionRate = parseFloat(280) || 0;
+    const hasPendingWithdrawal = false;
+    
+    // Disable form elements if user has pending withdrawal
+    if (hasPendingWithdrawal) {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Disable all payment method selections
+            document.querySelectorAll('.withdraw-payment-method').forEach(method => {
+                method.style.pointerEvents = 'none';
+                method.style.opacity = '0.6';
+                method.style.cursor = 'not-allowed';
+            });
+            
+            // Disable amount input
+            const amountInput = document.getElementById('withdraw-amount-input');
+            if (amountInput) {
+                amountInput.disabled = true;
+                amountInput.style.cursor = 'not-allowed';
+            }
+            
+            // Disable preset amount buttons
+            document.querySelectorAll('.withdraw-preset-btn').forEach(btn => {
+                btn.disabled = true;
+                btn.style.cursor = 'not-allowed';
+                btn.style.opacity = '0.6';
+            });
+            
+            // Disable continue button
+            const continueBtn = document.getElementById('withdraw-continue-btn');
+            if (continueBtn) {
+                continueBtn.disabled = true;
+                continueBtn.style.cursor = 'not-allowed';
+            }
+        });
+    }
+    
+    // Crypto wallets data for minimum withdrawal calculation
+    const cryptoWallets = [{"id":1,"network":"bnb_smart_chain","network_display_name":"BNB Smart Chain","wallet_address":"0xcf7393C2eDea75F99C988926C9038Af27cC733b1","qr_code_image":"assets\/admin\/images\/crypto-wallets\/w3LXMKg4urTciLYvZ5NafJBtaOAJo0TxRDO3qUxi.jpeg","token":"USDT","is_active":true,"allowed_for_deposit":true,"allowed_for_withdrawal":true,"minimum_deposit":"5.00","maximum_deposit":"1000.00","minimum_withdrawal":"5.00","maximum_withdrawal":"100.00","created_at":"2026-01-25T19:25:35.000000Z","updated_at":"2026-04-02T09:54:08.000000Z"},{"id":2,"network":"tron","network_display_name":"TRON","wallet_address":"TCe6zfypPevALjoo5FiQNEN5k34dRMk3uD","qr_code_image":"assets\/admin\/images\/crypto-wallets\/528v2G8gIHLfnmOF5HSxDArQydXRLjuch2f9faVp.jpeg","token":"USDT","is_active":true,"allowed_for_deposit":true,"allowed_for_withdrawal":true,"minimum_deposit":"5.00","maximum_deposit":"1000.00","minimum_withdrawal":"5.00","maximum_withdrawal":"100.00","created_at":"2026-01-25T19:26:38.000000Z","updated_at":"2026-04-01T18:55:47.000000Z"},{"id":5,"network":"ethereum","network_display_name":"Ethirum","wallet_address":"0xe97cf15d41682cfa903359db3914966dfbddfac4","qr_code_image":"assets\/admin\/images\/crypto-wallets\/AJDbt3oAGa87vsU9H3Q5qPyabRYiZfwOC5qRYHIP.jpeg","token":"USDT","is_active":true,"allowed_for_deposit":true,"allowed_for_withdrawal":true,"minimum_deposit":"10.00","maximum_deposit":"500000.00","minimum_withdrawal":"10.00","maximum_withdrawal":"50000.00","created_at":"2026-04-01T04:41:04.000000Z","updated_at":"2026-04-01T04:41:04.000000Z"},{"id":6,"network":"solana","network_display_name":"Solana","wallet_address":"Fs1gmWDhYh5anJerENBfUUdjAHHN66V1RNeY5QhpeF7P","qr_code_image":"assets\/admin\/images\/crypto-wallets\/X3Dhn3tLslIpOrQdjb5mnSmmHmnPn4pr7Na1eekT.jpeg","token":"USDT","is_active":true,"allowed_for_deposit":true,"allowed_for_withdrawal":true,"minimum_deposit":"10.00","maximum_deposit":"50000.00","minimum_withdrawal":"10.00","maximum_withdrawal":"50000.00","created_at":"2026-04-01T06:24:47.000000Z","updated_at":"2026-04-01T06:24:47.000000Z"}];
+    const cryptoFee = 1.00;
+
+    // Function to update PKR amount display
+    function updateWithdrawPKRAmount() {
+        const amountInput = document.getElementById('withdraw-amount-input');
+        const pkrAmountDisplay = document.getElementById('withdraw-pkr-amount');
+        const pkrAmountText = document.getElementById('withdraw-pkr-amount-text');
+
+        if (!amountInput || !pkrAmountDisplay || !pkrAmountText) {
+            return;
+        }
+
+        const amount = parseFloat(amountInput.value) || 0;
+        const rate = conversionRate;
+
+        // Show PKR amount only if payment method is selected, amount is valid, and conversion rate exists
+        if (selectedPaymentMethod && amount > 0 && rate > 0) {
+            const pkrAmount = amount * rate;
+            // Format dollar amount, remove trailing zeros
+            const formattedUSD = amount.toLocaleString('en-US', {
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 0
+            });
+            // Format PKR amount with commas, remove trailing zeros
+            const formattedPKR = pkrAmount.toLocaleString('en-US', {
+                maximumFractionDigits: 2,
+                minimumFractionDigits: 0
+            });
+            pkrAmountText.textContent = `$${formattedUSD} = Rs ${formattedPKR}`;
+            pkrAmountDisplay.style.display = 'block';
+        } else {
+            pkrAmountDisplay.style.display = 'none';
+        }
+    }
+
+    // Payment method selection
+    document.querySelectorAll('.withdraw-payment-method').forEach(method => {
+        method.addEventListener('click', function() {
+            // Remove active class from all methods
+            document.querySelectorAll('.withdraw-payment-method').forEach(m => m.classList.remove('active'));
+
+            // Add active class to clicked method
+            this.classList.add('active');
+
+            // Store selected payment method data
+            let minWithdrawal = parseFloat(this.dataset.minWithdrawal) || 0;
+            let maxWithdrawal = parseFloat(this.dataset.maxWithdrawal) || null;
+            const methodType = this.dataset.methodType || 'rast';
+            
+            // For crypto payment methods, calculate minimum from crypto wallets (accounting for fee)
+            if (methodType === 'crypto' && cryptoWallets.length > 0) {
+                const cryptoMinWithdrawals = cryptoWallets
+                    .filter(w => w.minimum_withdrawal)
+                    .map(w => parseFloat(w.minimum_withdrawal));
+                
+                if (cryptoMinWithdrawals.length > 0) {
+                    const minCryptoWithdrawal = Math.min(...cryptoMinWithdrawals);
+                    // User needs to select minimum + fee to receive the minimum
+                    minWithdrawal = minCryptoWithdrawal + cryptoFee;
+                } else {
+                    // No minimum set, but still need to account for fee
+                    minWithdrawal = cryptoFee + 0.01; // At least $1.01 to receive $0.01
+                }
+                
+                // For maximum, also account for fee if set
+                if (cryptoWallets.some(w => w.maximum_withdrawal)) {
+                    const cryptoMaxWithdrawals = cryptoWallets
+                        .filter(w => w.maximum_withdrawal)
+                        .map(w => parseFloat(w.maximum_withdrawal));
+                    if (cryptoMaxWithdrawals.length > 0) {
+                        const maxCryptoWithdrawal = Math.max(...cryptoMaxWithdrawals);
+                        maxWithdrawal = maxCryptoWithdrawal + cryptoFee;
+                    }
+                }
+            }
+            
+            selectedPaymentMethod = {
+                id: this.dataset.methodId,
+                name: this.dataset.methodName,
+                type: methodType,
+                minWithdrawal: minWithdrawal,
+                maxWithdrawal: maxWithdrawal
+            };
+
+            // Show withdraw amount section with animation
+            const withdrawAmountSection = document.querySelector('.withdraw-amount-section');
+            if (withdrawAmountSection) {
+                // Add show class
+                withdrawAmountSection.classList.add('show');
+                // Use inline styles to ensure visibility (overrides any CSS conflicts)
+                withdrawAmountSection.style.display = 'block';
+                withdrawAmountSection.style.opacity = '1';
+                // Smooth scroll to the amount section for better UX
+                setTimeout(() => {
+                    withdrawAmountSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 300);
+            }
+
+            // Update limit info
+            const limitInfo = document.getElementById('withdraw-limit-info');
+            if (limitInfo) {
+                let limitText = '';
+                if (selectedPaymentMethod.minWithdrawal > 0) {
+                    limitText += 'Min: $' + selectedPaymentMethod.minWithdrawal.toFixed(2);
+                }
+                if (selectedPaymentMethod.maxWithdrawal) {
+                    if (limitText) limitText += ' | ';
+                    limitText += 'Max: $' + selectedPaymentMethod.maxWithdrawal.toFixed(2);
+                }
+                limitInfo.textContent = limitText;
+                limitInfo.style.display = limitText ? 'block' : 'none';
+            }
+
+            // Update minimum withdrawal instruction text
+            const minAmountText = document.getElementById('withdraw-min-amount-text');
+            if (minAmountText && selectedPaymentMethod) {
+                let minWithdrawal = selectedPaymentMethod.minWithdrawal || 0;
+                let instructionText = '';
+                
+                // For crypto payment methods, use crypto wallet minimum (accounting for fee)
+                if (selectedPaymentMethod.type === 'crypto' && cryptoWallets.length > 0) {
+                    // Get the minimum withdrawal from all active crypto wallets
+                    // User needs to select: crypto_wallet_minimum + $1 fee
+                    const cryptoMinWithdrawals = cryptoWallets
+                        .filter(w => w.minimum_withdrawal)
+                        .map(w => parseFloat(w.minimum_withdrawal));
+                    
+                    if (cryptoMinWithdrawals.length > 0) {
+                        const minCryptoWithdrawal = Math.min(...cryptoMinWithdrawals);
+                        // User needs to select minimum + fee to receive the minimum
+                        minWithdrawal = minCryptoWithdrawal + cryptoFee;
+                        instructionText = `Minimum withdrawal for ${selectedPaymentMethod.name} is $${minWithdrawal.toFixed(2)} (including $${cryptoFee.toFixed(2)} fee). You will receive $${minCryptoWithdrawal.toFixed(2)}.`;
+                    } else {
+                        // No minimum set, but still need to account for fee
+                        minWithdrawal = cryptoFee + 0.01; // At least $1.01 to receive $0.01
+                        instructionText = `Minimum withdrawal for ${selectedPaymentMethod.name} is $${minWithdrawal.toFixed(2)} (including $${cryptoFee.toFixed(2)} fee).`;
+                    }
+                } else {
+                    // For non-crypto payment methods
+                    const formattedMinWithdrawal = minWithdrawal > 0 
+                        ? minWithdrawal.toFixed(2) 
+                        : '0.00';
+                    instructionText = `Minimum withdrawal for ${selectedPaymentMethod.name} is $${formattedMinWithdrawal}`;
+                }
+                
+                minAmountText.textContent = instructionText;
+            }
+
+            // Update input min/max attributes and clear previous selections
+            const amountInput = document.getElementById('withdraw-amount-input');
+            if (amountInput) {
+                amountInput.min = selectedPaymentMethod.minWithdrawal || 0.01;
+                if (selectedPaymentMethod.maxWithdrawal) {
+                    amountInput.max = selectedPaymentMethod.maxWithdrawal;
+                } else {
+                    amountInput.removeAttribute('max');
+                }
+                // Clear previous amount and preset selections
+                amountInput.value = '';
+                document.querySelectorAll('.withdraw-preset-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                // Update PKR amount display (will hide since amount is cleared)
+                updateWithdrawPKRAmount();
+            }
+
+            // Update continue button text
+            const continueBtn = document.getElementById('withdraw-continue-btn');
+            if (continueBtn && selectedPaymentMethod) {
+                continueBtn.textContent = `Continue Withdrawal with ${selectedPaymentMethod.name}`;
+            }
+        });
+    });
+
+    // Preset amount buttons
+    document.querySelectorAll('.withdraw-preset-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Remove active class from all preset buttons
+            document.querySelectorAll('.withdraw-preset-btn').forEach(b => b.classList.remove('active'));
+
+            // Add active class to clicked button
+            this.classList.add('active');
+
+            // Set the amount in the input field
+            const amount = this.dataset.amount;
+            const amountInput = document.getElementById('withdraw-amount-input');
+            if (amountInput) {
+                amountInput.value = amount;
+                // Update PKR amount display immediately
+                updateWithdrawPKRAmount();
+                // Trigger input event to validate
+                amountInput.dispatchEvent(new Event('input'));
+            }
+        });
+    });
+
+    // Clear preset selection when user types custom amount
+    const amountInput = document.getElementById('withdraw-amount-input');
+    const continueBtn = document.getElementById('withdraw-continue-btn');
+
+    if (amountInput && continueBtn) {
+        amountInput.addEventListener('input', function() {
+            // Check if the value matches any preset
+            const value = parseFloat(this.value);
+            const presetButtons = document.querySelectorAll('.withdraw-preset-btn');
+            let matchesPreset = false;
+
+            presetButtons.forEach(btn => {
+                const presetAmount = parseFloat(btn.dataset.amount);
+                if (value === presetAmount) {
+                    btn.classList.add('active');
+                    matchesPreset = true;
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+
+            // If doesn't match any preset, clear all active states
+            if (!matchesPreset && this.value !== '') {
+                presetButtons.forEach(btn => btn.classList.remove('active'));
+            }
+
+            // Update PKR amount display
+            updateWithdrawPKRAmount();
+
+            const amount = parseFloat(this.value);
+            // Note: Withdrawals can only use mining_earning + referral_earning (NOT fund_wallet)
+            const miningEarning = 0.00;
+            const referralEarning = 0.00;
+            const userBalance = miningEarning + referralEarning;
+
+            // Get message elements
+            const insufficientBalanceMsg = document.getElementById('withdraw-insufficient-balance-message');
+            const insufficientBalanceText = document.getElementById('withdraw-insufficient-balance-text');
+
+            if (!selectedPaymentMethod) {
+                continueBtn.disabled = true;
+                if (insufficientBalanceMsg) insufficientBalanceMsg.style.display = 'none';
+                return;
+            }
+
+            if (!amount || amount <= 0) {
+                continueBtn.disabled = true;
+                if (insufficientBalanceMsg) insufficientBalanceMsg.style.display = 'none';
+                return;
+            }
+
+            // Check minimum
+            if (selectedPaymentMethod.minWithdrawal > 0 && amount < selectedPaymentMethod.minWithdrawal) {
+                continueBtn.disabled = true;
+                if (insufficientBalanceMsg && insufficientBalanceText) {
+                    if (userBalance < selectedPaymentMethod.minWithdrawal) {
+                        insufficientBalanceText.textContent = `Minimum withdrawal amount is $${selectedPaymentMethod.minWithdrawal.toFixed(2)}, but your available balance is only $${userBalance.toFixed(2)}. You can only withdraw from mining and referral earnings.`;
+                        insufficientBalanceMsg.style.display = 'block';
+                    } else {
+                        insufficientBalanceMsg.style.display = 'none';
+                    }
+                }
+                return;
+            }
+
+            // Check maximum
+            if (selectedPaymentMethod.maxWithdrawal && amount > selectedPaymentMethod.maxWithdrawal) {
+                continueBtn.disabled = true;
+                if (insufficientBalanceMsg) insufficientBalanceMsg.style.display = 'none';
+                return;
+            }
+
+            // Check user balance
+            
+            if (amount > userBalance) {
+                continueBtn.disabled = true;
+                if (insufficientBalanceMsg && insufficientBalanceText) {
+                    const minRequired = selectedPaymentMethod.minWithdrawal || 0;
+                    if (minRequired > 0 && userBalance < minRequired) {
+                        insufficientBalanceText.textContent = `Minimum withdrawal amount is $${minRequired.toFixed(2)}, but your available balance is only $${userBalance.toFixed(2)}. You can only withdraw from mining and referral earnings.`;
+                    } else {
+                        insufficientBalanceText.textContent = `Insufficient balance. Your available withdrawal balance is $${userBalance.toFixed(2)}. You can only withdraw from mining and referral earnings.`;
+                    }
+                    insufficientBalanceMsg.style.display = 'block';
+                }
+                return;
+            } else {
+                if (insufficientBalanceMsg) {
+                    insufficientBalanceMsg.style.display = 'none';
+                }
+            }
+
+            continueBtn.disabled = false;
+        });
+    }
+
+    // Continue button click
+    if (continueBtn) {
+        continueBtn.addEventListener('click', function() {
+            if (this.disabled) return;
+
+            const amount = parseFloat(amountInput.value);
+            if (!selectedPaymentMethod || !amount) {
+                alert('Please select a payment method and enter an amount.');
+                return;
+            }
+
+            // Navigate to confirmation page
+            window.location.href = `https://sparkx1.pro/user/dashboard/withdraw/confirm?method_id=${selectedPaymentMethod.id}&amount=${amount}`;
+        });
+    }
+
+    // Withdrawal History Filtering and Search
+    const withdrawSearchInput = document.getElementById('withdraw-search-input');
+    const withdrawDateFilter = document.getElementById('withdraw-date-filter');
+    const withdrawTransactionsList = document.getElementById('withdraw-transactions-list');
+    const withdrawHistoryEmpty = document.getElementById('withdraw-history-empty');
+
+    // Advance Search Modal Elements
+    const withdrawAdvanceSearchModal = document.getElementById('withdraw-advance-search-modal');
+    const withdrawAdvanceSearchClose = document.getElementById('withdraw-advance-search-close');
+    const withdrawAdvanceSearchApply = document.getElementById('withdraw-advance-apply');
+    const withdrawAdvanceSearchClear = document.getElementById('withdraw-advance-clear');
+    const withdrawDateRangeInput = document.getElementById('withdraw-date-range-input');
+    const withdrawAdvanceSortSelect = document.getElementById('withdraw-advance-sort');
+
+    // Filter state
+    let withdrawDateRangeFilter = null;
+    let withdrawSortOrder = 'newest';
+
+    // Date range picker
+    let withdrawStartDate = null;
+    let withdrawEndDate = null;
+    const withdrawStartDateInput = document.getElementById('withdraw-start-date');
+    const withdrawEndDateInput = document.getElementById('withdraw-end-date');
+
+    function updateWithdrawDateRangeDisplay() {
+        if (withdrawStartDate && withdrawEndDate) {
+            const formatDate = (date) => {
+                const day = String(date.getDate()).padStart(2, '0');
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const year = date.getFullYear();
+                return `${day}/${month}/${year}`;
+            };
+            withdrawDateRangeInput.value = `${formatDate(withdrawStartDate)} - ${formatDate(withdrawEndDate)}`;
+            withdrawDateRangeFilter = {
+                start: Math.floor(withdrawStartDate.getTime() / 1000),
+                end: Math.floor(withdrawEndDate.getTime() / 1000) + 86400 // Add one day to include the end date
+            };
+        } else {
+            withdrawDateRangeInput.value = '';
+            withdrawDateRangeFilter = null;
+        }
+    }
+
+    if (withdrawDateRangeInput) {
+        withdrawDateRangeInput.addEventListener('click', function() {
+            if (withdrawStartDateInput && typeof withdrawStartDateInput.showPicker === 'function') {
+                withdrawStartDateInput.showPicker();
+            } else {
+                withdrawStartDateInput.click();
+            }
+        });
+    }
+
+    if (withdrawStartDateInput) {
+        withdrawStartDateInput.addEventListener('change', function() {
+            withdrawStartDate = new Date(this.value);
+            if (withdrawEndDateInput) {
+                withdrawEndDateInput.min = this.value;
+                if (withdrawEndDate && withdrawEndDate < withdrawStartDate) {
+                    withdrawEndDate = null;
+                    withdrawEndDateInput.value = '';
+                }
+                updateWithdrawDateRangeDisplay();
+                // Automatically open end date picker
+                setTimeout(() => {
+                    if (typeof withdrawEndDateInput.showPicker === 'function') {
+                        withdrawEndDateInput.showPicker();
+                    } else {
+                        withdrawEndDateInput.click();
+                    }
+                }, 100);
+            } else {
+                updateWithdrawDateRangeDisplay();
+            }
+        });
+    }
+
+    if (withdrawEndDateInput) {
+        withdrawEndDateInput.addEventListener('change', function() {
+            withdrawEndDate = new Date(this.value);
+            updateWithdrawDateRangeDisplay();
+        });
+    }
+
+    function filterWithdrawals() {
+        const searchTerm = withdrawSearchInput ? withdrawSearchInput.value.toLowerCase().trim() : '';
+        const dateFilter = withdrawDateFilter ? withdrawDateFilter.value : 'all';
+        const transactionCards = withdrawTransactionsList ? Array.from(withdrawTransactionsList.querySelectorAll('.withdraw-transaction-card')) : [];
+
+        let visibleCount = 0;
+        const now = Math.floor(Date.now() / 1000);
+        const daysInSeconds = {
+            '3': 3 * 24 * 60 * 60,
+            '7': 7 * 24 * 60 * 60,
+            '30': 30 * 24 * 60 * 60
+        };
+
+        // Filter cards
+        const filteredCards = transactionCards.filter(card => {
+            const transactionDate = parseInt(card.dataset.date);
+            const transactionStatus = card.dataset.status.toLowerCase();
+            const transactionAmount = parseFloat(card.dataset.amount);
+            const transactionId = (card.dataset.transactionId || '').toLowerCase();
+            const cardText = card.textContent.toLowerCase();
+
+            // Date filter (from dropdown)
+            let dateMatch = true;
+            if (dateFilter !== 'all' && !withdrawDateRangeFilter) {
+                const daysAgo = daysInSeconds[dateFilter];
+                const cutoffDate = now - daysAgo;
+                dateMatch = transactionDate >= cutoffDate;
+            }
+
+            // Date range filter (from advance search)
+            if (withdrawDateRangeFilter) {
+                dateMatch = transactionDate >= withdrawDateRangeFilter.start && transactionDate <= withdrawDateRangeFilter.end;
+            }
+
+            // Search filter
+            let searchMatch = true;
+            if (searchTerm) {
+                searchMatch = cardText.includes(searchTerm) ||
+                             transactionId.includes(searchTerm) ||
+                             transactionAmount.toString().includes(searchTerm);
+            }
+
+            return dateMatch && searchMatch;
+        });
+
+        // Sort filtered cards
+        filteredCards.sort((a, b) => {
+            const dateA = parseInt(a.dataset.date);
+            const dateB = parseInt(b.dataset.date);
+            const amountA = parseFloat(a.dataset.amount);
+            const amountB = parseFloat(b.dataset.amount);
+
+            switch(withdrawSortOrder) {
+                case 'newest':
+                    return dateB - dateA;
+                case 'oldest':
+                    return dateA - dateB;
+                case 'amount-high':
+                    return amountB - amountA;
+                case 'amount-low':
+                    return amountA - amountB;
+                default:
+                    return dateB - dateA;
+            }
+        });
+
+        // Show/hide cards
+        transactionCards.forEach(card => {
+            if (filteredCards.includes(card)) {
+                card.style.display = 'flex';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        });
+
+        // Reorder visible cards
+        filteredCards.forEach(card => {
+            withdrawTransactionsList.appendChild(card);
+        });
+
+        // Show/hide empty state
+        if (withdrawHistoryEmpty) {
+            if (visibleCount === 0) {
+                withdrawHistoryEmpty.classList.add('show');
+            } else {
+                withdrawHistoryEmpty.classList.remove('show');
+            }
+        }
+    }
+
+    // Open advance search modal
+    function openWithdrawAdvanceSearchModal() {
+        if (withdrawAdvanceSearchModal) {
+            withdrawAdvanceSearchModal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Close advance search modal
+    function closeWithdrawAdvanceSearchModal() {
+        if (withdrawAdvanceSearchModal) {
+            withdrawAdvanceSearchModal.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+    }
+
+    // Apply filters from advance search
+    if (withdrawAdvanceSearchApply) {
+        withdrawAdvanceSearchApply.addEventListener('click', function() {
+            withdrawSortOrder = withdrawAdvanceSortSelect ? withdrawAdvanceSortSelect.value : 'newest';
+            filterWithdrawals();
+            closeWithdrawAdvanceSearchModal();
+        });
+    }
+
+    // Clear filters
+    if (withdrawAdvanceSearchClear) {
+        withdrawAdvanceSearchClear.addEventListener('click', function() {
+            withdrawStartDate = null;
+            withdrawEndDate = null;
+            withdrawDateRangeFilter = null;
+            if (withdrawDateRangeInput) {
+                withdrawDateRangeInput.value = '';
+            }
+            if (withdrawStartDateInput) {
+                withdrawStartDateInput.value = '';
+            }
+            if (withdrawEndDateInput) {
+                withdrawEndDateInput.value = '';
+            }
+            if (withdrawAdvanceSortSelect) {
+                withdrawAdvanceSortSelect.value = 'newest';
+            }
+            withdrawSortOrder = 'newest';
+            filterWithdrawals();
+            closeWithdrawAdvanceSearchModal();
+        });
+    }
+
+    // Close modal handlers
+    if (withdrawAdvanceSearchClose) {
+        withdrawAdvanceSearchClose.addEventListener('click', closeWithdrawAdvanceSearchModal);
+    }
+
+    if (withdrawAdvanceSearchModal) {
+        withdrawAdvanceSearchModal.addEventListener('click', function(e) {
+            if (e.target === withdrawAdvanceSearchModal) {
+                closeWithdrawAdvanceSearchModal();
+            }
+        });
+    }
+
+    // Open modal from filter icons
+    const withdrawFilterIcons = document.querySelectorAll('.withdraw-filter-icon, .withdraw-search-filter-btn');
+    withdrawFilterIcons.forEach(icon => {
+        icon.addEventListener('click', openWithdrawAdvanceSearchModal);
+    });
+
+    // Add event listeners
+    if (withdrawSearchInput) {
+        withdrawSearchInput.addEventListener('input', filterWithdrawals);
+    }
+
+    if (withdrawDateFilter) {
+        withdrawDateFilter.addEventListener('change', filterWithdrawals);
+    }
+
+    // Initial filter
+    filterWithdrawals();
+
+    // Proof Image Modal Functions
+    function openProofModal(imageUrl) {
+        const modal = document.getElementById('proof-modal');
+        const modalImage = document.getElementById('proof-modal-image');
+        if (modal && modalImage) {
+            modalImage.src = imageUrl;
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+    }
+
+    function closeProofModal() {
+        const modal = document.getElementById('proof-modal');
+        if (modal) {
+            modal.classList.remove('show');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    }
+
+    // Close modal when clicking outside the image
+    document.addEventListener('click', function(event) {
+        const modal = document.getElementById('proof-modal');
+        if (modal && event.target === modal) {
+            closeProofModal();
+        }
+    });
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeProofModal();
+        }
+    });
+</script>
+            </div>
+
+            <!-- Footer -->
+            <footer class="dashboard-footer">
+    <div class="footer-content">
+        <p>&copy; 2026 Sparkx. All rights reserved.</p>
+    </div>
+</footer>
+        </div>
+    </div>
+
+    <!-- Mobile Bottom Navigation -->
+    <style>
+    .recharge-icon {
+    color: #00C853; /* green = money in */
+}
+</style>
+<!-- Mobile Bottom Navigation -->
+<nav class="mobile-bottom-nav" id="mobileBottomNav">
+    <a href="https://sparkx1.pro/user/dashboard" class="mobile-nav-item" data-route="dashboard.index">
+        <div class="mobile-nav-icon">
+          <i class="fas fa-tachometer-alt"></i>
+        </div>
+        <span class="mobile-nav-label">Dashboard</span>
+    </a>
+    
+    <a href="https://sparkx1.pro/user/dashboard/deposit" class="mobile-nav-item" data-route="deposit.index">
+        <div class="mobile-nav-icon">
+           <i class="fas fa-plus-circle"></i>
+        </div>
+        <span class="mobile-nav-label">Recharge</span>
+    </a>
+    
+    <a href="https://sparkx1.pro/user/dashboard/referrals" class="mobile-nav-item" data-route="referrals.index">
+        <div class="mobile-nav-icon">
+            <i class="fas fa-share-alt"></i>
+        </div>
+        <span class="mobile-nav-label">Referralls</span>
+    </a>
+    
+    <a href="https://sparkx1.pro/user/dashboard/plans" class="mobile-nav-item" data-route="plans.index">
+        <div class="mobile-nav-icon">
+           <i class="fas fa-layer-group"></i>
+        </div>
+        <span class="mobile-nav-label">Plans</span>
+    </a>
+    
+    <a href="https://sparkx1.pro/user/dashboard/settings" class="mobile-nav-item" data-route="settings.index">
+        <div class="mobile-nav-icon">
+           <i class="fas fa-cogs"></i>
+        </div>
+        <span class="mobile-nav-label">Setting</span>
+    </a>
+</nav>
+
+
+    <!-- Chat Button -->
+    <!-- Fixed Chat Button -->
+<div class="chat-button-container" id="chatButtonContainer">
+    <button class="chat-button" id="chatButton" aria-label="Start a chat">
+        <i class="fa-sharp fa-solid fa-comment-dots"></i>
+        <span class="chat-notification-badge" id="chatNotificationBadge" style="display: none;"></span>
+    </button>
+</div>
+
+<!-- Start Chat Modal -->
+<div class="chat-modal-overlay" id="startChatModal" style="display: none;">
+    <div class="chat-modal">
+        <div class="chat-modal-header">
+            <h3>Start a Chat</h3>
+            <button class="chat-modal-close" id="closeStartChatModal" aria-label="Close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="chat-modal-body">
+            <form id="startChatForm">
+                <input type="hidden" name="_token" value="XOtZWocKBTv9B8Nh65Uu44Di75AdBWdt2ftrm31g" autocomplete="off">                <div class="form-group">
+                    <label for="chatName">Name *</label>
+                    <input type="text" id="chatName" name="name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="chatEmail">Email *</label>
+                    <input type="email" id="chatEmail" name="email" class="form-control" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="chatMessage">Message *</label>
+                    <textarea id="chatMessage" name="message" class="form-control" rows="4" placeholder="Type your message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block" id="startChatBtn">
+                    Start Chat
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Live Chat Window -->
+<div class="live-chat-window" id="liveChatWindow" style="display: none;">
+    <div class="live-chat-header">
+        <div class="live-chat-header-left">
+            <h4>Live Chat</h4>
+            <span class="live-chat-status" id="chatStatus">Waiting for agent...</span>
+        </div>
+        <button class="live-chat-close" id="closeLiveChat" aria-label="Close chat">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="live-chat-messages" id="chatMessages">
+        <!-- Messages will be loaded here -->
+    </div>
+    <div class="live-chat-input-container">
+        <div class="live-chat-input-actions">
+            <button class="chat-action-btn" id="refreshChatBtn" aria-label="Refresh">
+                <i class="fas fa-redo"></i>
+            </button>
+            <button class="chat-action-btn" id="imageChatBtn" aria-label="Upload image" type="button">
+                <i class="fas fa-image"></i>
+            </button>
+            <input type="file" id="chatImageInput" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" style="display: none;">
+        </div>
+        <input type="text" id="chatMessageInput" class="live-chat-input" placeholder="Ask me anything...">
+        <button type="button" class="live-chat-send" id="sendChatMessage" aria-label="Send message">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
+</div>
+
+<style>
+/* Chat Button Styles - White & Purple Theme */
+.chat-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.chat-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9333EA 0%, #7E22CE 100%);
+    border: none;
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(147, 51, 234, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.chat-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 25px rgba(147, 51, 234, 0.6);
+}
+
+.chat-button:active {
+    transform: scale(0.95);
+}
+
+.chat-notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 12px;
+    height: 12px;
+    background: #ef4444;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: none;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+/* Chat Modal Styles - White & Purple Theme */
+.chat-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.chat-modal {
+    background: #FFFFFF;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(147, 51, 234, 0.2);
+}
+
+.chat-modal-header {
+    background: linear-gradient(135deg, #9333EA 0%, #7E22CE 100%);
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chat-modal-header h3 {
+    color: white;
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.chat-modal-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.chat-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.chat-modal-body {
+    padding: 1.5rem;
+}
+
+.chat-modal-body .form-group {
+    margin-bottom: 1.25rem;
+}
+
+.chat-modal-body label {
+    display: block;
+    color: #1F2937;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.chat-modal-body .form-control {
+    width: 100%;
+    padding: 0.75rem;
+    background: #F9FAFB;
+    border: 1px solid rgba(147, 51, 234, 0.3);
+    border-radius: 8px;
+    color: #1F2937;
+    font-size: 0.9375rem;
+    transition: all 0.2s;
+}
+
+.chat-modal-body .form-control::placeholder {
+    color: #6B7280;
+}
+
+.chat-modal-body .form-control:focus {
+    outline: none;
+    border-color: #9333EA;
+    box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+    background: #FFFFFF;
+}
+
+.chat-modal-body textarea.form-control {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #9333EA 0%, #7E22CE 100%);
+    border: none;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0);
+}
+
+.btn-primary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.btn-primary:disabled:hover {
+    transform: none;
+    opacity: 0.7;
+}
+
+/* Live Chat Window Styles - White & Purple Theme */
+.live-chat-window {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 380px;
+    max-width: calc(100vw - 40px);
+    height: 600px;
+    max-height: calc(100vh - 120px);
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(147, 51, 234, 0.2);
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid rgba(147, 51, 234, 0.2);
+}
+
+.live-chat-header {
+    background: linear-gradient(135deg, #9333EA 0%, #7E22CE 100%);
+    padding: 1rem 1.25rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.live-chat-header-left h4 {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.live-chat-status {
+    font-size: 0.75rem;
+    opacity: 0.9;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+.live-chat-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1.125rem;
+    cursor: pointer;
+    padding: 0.25rem;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.live-chat-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.live-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.25rem;
+    background: #F9FAFB;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.chat-message {
+    display: flex;
+    flex-direction: column;
+    max-width: 75%;
+}
+
+.chat-message.user {
+    align-self: flex-end;
+}
+
+.chat-message.admin {
+    align-self: flex-start;
+}
+
+.chat-message-bubble {
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    word-wrap: break-word;
+}
+
+.chat-message.user .chat-message-bubble {
+    background: linear-gradient(135deg, #9333EA 0%, #7E22CE 100%);
+    color: white;
+}
+
+.chat-message.admin .chat-message-bubble {
+    background: #FFFFFF;
+    color: #1F2937;
+    border: 1px solid #E5E7EB;
+}
+
+.chat-message-time {
+    font-size: 0.75rem;
+    color: #6B7280;
+    margin-top: 0.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.chat-message.user .chat-message-time {
+    justify-content: flex-end;
+}
+
+.chat-message-status {
+    font-size: 0.75rem;
+    margin-left: 0.25rem;
+}
+
+.chat-message-status.unread {
+    color: #9CA3AF;
+}
+
+.chat-message-status.read {
+    color: #10B981;
+}
+
+.live-chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #E5E7EB;
+}
+
+.live-chat-input-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-shrink: 0;
+}
+
+.chat-action-btn {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #9333EA;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.chat-action-btn:hover {
+    background: #7E22CE;
+    transform: scale(1.05);
+}
+
+.live-chat-input {
+    flex: 1;
+    padding: 0.75rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 20px;
+    font-size: 0.9375rem;
+    outline: none;
+    min-width: 0;
+    background: #F9FAFB;
+    color: #1F2937;
+}
+
+.live-chat-input::placeholder {
+    color: #6B7280;
+}
+
+.live-chat-input:focus {
+    border-color: #9333EA;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.1);
+}
+
+.live-chat-send {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #9333EA 0%, #7E22CE 100%);
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    flex-shrink: 0;
+}
+
+.live-chat-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+.live-chat-send:active {
+    transform: scale(0.95);
+}
+
+/* Scrollbar Styling for Chat Messages */
+.live-chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+.live-chat-messages::-webkit-scrollbar-track {
+    background: #F3F4F6;
+}
+
+.live-chat-messages::-webkit-scrollbar-thumb {
+    background: #9333EA;
+    border-radius: 3px;
+}
+
+.live-chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #7E22CE;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .live-chat-window {
+        width: 90%;
+        max-width: 350px;
+        height: 70vh;
+        max-height: 500px;
+        bottom: 80px;
+        right: 5%;
+        left: auto;
+        border-radius: 16px;
+    }
+
+    .live-chat-input-container {
+        gap: 0.375rem;
+        padding: 0.75rem;
+    }
+
+    .chat-button-container {
+        bottom: 80px;
+        right: 15px;
+    }
+
+    .chat-button {
+        width: 56px;
+        height: 56px;
+        font-size: 22px;
+    }
+}
+</style>
+    <script>
+    (function() {
+        function ensureToastStyles() {
+            if (document.getElementById('appToastStyles')) return;
+            const style = document.createElement('style');
+            style.id = 'appToastStyles';
+            style.textContent = `
+                .app-toast-container{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:100000;pointer-events:none;width:calc(100% - 32px);max-width:520px;}
+                .app-toast{pointer-events:none;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.25);font-weight:600;line-height:1.35;}
+                .app-toast__icon{width:34px;height:34px;border-radius:999px;display:flex;align-items:center;justify-content:center;flex:0 0 auto;background:rgba(255,255,255,.18);}
+                .app-toast__icon i{color:#fff;font-size:16px;}
+                .app-toast__text{color:#fff;font-size:14px;}
+                .app-toast--success{background:#FFB21E;}
+                .app-toast--error{background:#ff4444;}
+                .app-toast--info{background:#6366F1;}
+                .app-toast-enter{animation:appToastIn .25s ease-out;}
+                .app-toast-exit{animation:appToastOut .25s ease-in forwards;}
+                @keyframes appToastIn{from{transform:translateY(-8px);opacity:0}to{transform:translateY(0);opacity:1}}
+                @keyframes appToastOut{from{transform:translateY(0);opacity:1}to{transform:translateY(-8px);opacity:0}}
+            `;
+            document.head.appendChild(style);
+        }
+
+        function getContainer() {
+            let container = document.getElementById('appToastContainer');
+            if (!container) {
+                container = document.createElement('div');
+                container.id = 'appToastContainer';
+                container.className = 'app-toast-container';
+                document.body.appendChild(container);
+            }
+            return container;
+        }
+
+        window.showAppMessage = function(message, type = 'success') {
+            ensureToastStyles();
+
+            const container = getContainer();
+            container.innerHTML = '';
+
+            const toast = document.createElement('div');
+            toast.className = `app-toast app-toast--${type} app-toast-enter`;
+
+            const icon = document.createElement('div');
+            icon.className = 'app-toast__icon';
+            const iconI = document.createElement('i');
+            iconI.className = type === 'success' ? 'fas fa-check' : (type === 'error' ? 'fas fa-times' : 'fas fa-info');
+            icon.appendChild(iconI);
+
+            const text = document.createElement('div');
+            text.className = 'app-toast__text';
+            text.textContent = message;
+
+            toast.appendChild(icon);
+            toast.appendChild(text);
+            container.appendChild(toast);
+
+            setTimeout(() => {
+                toast.classList.remove('app-toast-enter');
+                toast.classList.add('app-toast-exit');
+                setTimeout(() => {
+                    if (toast.parentNode) toast.parentNode.removeChild(toast);
+                }, 260);
+            }, 6000);
+        };
+
+        window.showSuccessMessage = function(message) {
+            window.showAppMessage(message, 'success');
+        };
+
+        window.showErrorMessage = function(message) {
+            window.showAppMessage(message, 'error');
+        };
+
+        window.showInfoMessage = function(message) {
+            window.showAppMessage(message, 'info');
+        };
+
+        if (typeof window.alert === 'function') {
+            window.alert = function(message) {
+                window.showInfoMessage(String(message ?? ''));
+            };
+        }
+
+        window.showConfirmDialog = function(message, onConfirm, onCancel) {
+            ensureToastStyles();
+            const existing = document.getElementById('appConfirmOverlay');
+            if (existing) existing.remove();
+
+            const overlay = document.createElement('div');
+            overlay.id = 'appConfirmOverlay';
+            overlay.style.cssText = 'position:fixed;inset:0;z-index:100001;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px;';
+
+            const modal = document.createElement('div');
+            modal.style.cssText = 'width:100%;max-width:420px;border-radius:16px;background:#1f2433;border:1px solid rgba(255,255,255,.08);box-shadow:0 18px 50px rgba(0,0,0,.45);padding:18px;';
+
+            const title = document.createElement('div');
+            title.textContent = 'Confirm';
+            title.style.cssText = 'font-weight:800;color:#fff;font-size:16px;margin-bottom:10px;';
+
+            const body = document.createElement('div');
+            body.textContent = message;
+            body.style.cssText = 'color:rgba(255,255,255,.85);font-size:14px;line-height:1.5;margin-bottom:14px;white-space:pre-line;';
+
+            const actions = document.createElement('div');
+            actions.style.cssText = 'display:flex;gap:10px;justify-content:flex-end;';
+
+            const cancelBtn = document.createElement('button');
+            cancelBtn.type = 'button';
+            cancelBtn.textContent = 'Cancel';
+            cancelBtn.style.cssText = 'padding:10px 14px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:transparent;color:#fff;font-weight:700;cursor:pointer;';
+
+            const okBtn = document.createElement('button');
+            okBtn.type = 'button';
+            okBtn.textContent = 'OK';
+            okBtn.style.cssText = 'padding:10px 14px;border-radius:12px;border:none;background:#FFB21E;color:#fff;font-weight:800;cursor:pointer;';
+
+            function close() {
+                overlay.remove();
+            }
+
+            cancelBtn.addEventListener('click', function() {
+                close();
+                if (typeof onCancel === 'function') onCancel();
+            });
+
+            okBtn.addEventListener('click', function() {
+                close();
+                if (typeof onConfirm === 'function') onConfirm();
+            });
+
+            overlay.addEventListener('click', function(e) {
+                if (e.target === overlay) {
+                    close();
+                    if (typeof onCancel === 'function') onCancel();
+                }
+            });
+
+            document.addEventListener('keydown', function escHandler(e) {
+                if (e.key === 'Escape') {
+                    document.removeEventListener('keydown', escHandler);
+                    close();
+                    if (typeof onCancel === 'function') onCancel();
+                }
+            });
+
+            actions.appendChild(cancelBtn);
+            actions.appendChild(okBtn);
+            modal.appendChild(title);
+            modal.appendChild(body);
+            modal.appendChild(actions);
+            overlay.appendChild(modal);
+            document.body.appendChild(overlay);
+        };
+
+        document.addEventListener('submit', function(e) {
+            const form = e.target;
+            if (form && form.matches && form.matches('form[data-confirm]')) {
+                e.preventDefault();
+                const msg = form.getAttribute('data-confirm') || 'Are you sure?';
+                window.showConfirmDialog(msg, function() {
+                    form.submit();
+                });
+            }
+        }, true);
+    })();
+
+    // Global function for sidebar toggle - works even if dashboard.js hasn't loaded
+    function toggleMobileSidebar(e) {
+        if (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        const sidebar = document.getElementById('dashboardSidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+        
+        if (!sidebar) {
+            console.error('Sidebar not found');
+            return false;
+        }
+        
+        const isActive = sidebar.classList.contains('active');
+        
+        if (isActive) {
+            sidebar.classList.remove('active');
+            if (sidebarOverlay) {
+                sidebarOverlay.classList.remove('active');
+            }
+            document.body.style.overflow = '';
+        } else {
+            sidebar.classList.add('active');
+            if (sidebarOverlay) {
+                sidebarOverlay.classList.add('active');
+            }
+            document.body.style.overflow = 'hidden';
+        }
+        
+        return false;
+    }
+    
+    // Also add event listener as backup
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebarToggle = document.getElementById('sidebarToggle');
+        if (sidebarToggle) {
+            // Remove onclick and add event listener instead for better control
+            sidebarToggle.removeAttribute('onclick');
+            sidebarToggle.addEventListener('click', function(e) {
+                toggleMobileSidebar(e);
+            }, true);
+            
+            sidebarToggle.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                toggleMobileSidebar(e);
+            }, true);
+            
+            // Ensure it's clickable
+            sidebarToggle.style.pointerEvents = 'auto';
+            sidebarToggle.style.cursor = 'pointer';
+            sidebarToggle.style.zIndex = '10002';
+        }
+    });
+
+    // Mobile bottom navigation visibility control - Hide on desktop
+    function toggleMobileNavVisibility() {
+        const mobileNav = document.getElementById('mobileBottomNav');
+        if (mobileNav) {
+            if (window.innerWidth > 768) {
+                // Desktop: Hide mobile navigation
+                mobileNav.style.display = 'none';
+                mobileNav.style.visibility = 'hidden';
+                mobileNav.style.opacity = '0';
+            } else {
+                // Mobile: Show mobile navigation (CSS will handle this, but ensure it's visible)
+                mobileNav.style.display = '';
+                mobileNav.style.visibility = '';
+                mobileNav.style.opacity = '';
+            }
+        }
+    }
+
+    // Run on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        toggleMobileNavVisibility();
+        
+        // Run on window resize
+        window.addEventListener('resize', toggleMobileNavVisibility);
+    });
+
+    // Mobile bottom navigation active state
+    document.addEventListener('DOMContentLoaded', function() {
+        const currentRoute = 'withdraw.index';
+        const navItems = document.querySelectorAll('.mobile-nav-item');
+        
+        if (currentRoute && navItems.length > 0) {
+            navItems.forEach(function(item) {
+                const itemRoute = item.getAttribute('data-route');
+                if (itemRoute === currentRoute) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        }
+    });
+
+    // Back navigation function for mobile header
+    function goBack() {
+        // Check if there's history to go back to
+        if (window.history.length > 1) {
+            // Check if we can go back within the dashboard
+            const referrer = document.referrer;
+            if (referrer && referrer.includes('/user/dashboard')) {
+                window.history.back();
+            } else {
+                // If coming from outside, go to dashboard home
+                window.location.href = 'https://sparkx1.pro/user/dashboard';
+            }
+        } else {
+            // No history, go to dashboard home
+            window.location.href = 'https://sparkx1.pro/user/dashboard';
+        }
+    }
+
+    // Notification Panel Toggle - Desktop Only, Mobile redirects to page
+    document.addEventListener('DOMContentLoaded', function() {
+        const notificationIcon = document.getElementById('notificationIcon');
+        const notificationPanel = document.getElementById('notificationPanel');
+        const notificationPanelBody = document.getElementById('notificationPanelBody');
+        const notificationBadge = document.getElementById('notificationBadge');
+        
+        // Load unread count on page load
+        loadUnreadCount();
+        
+        // Load notifications when panel is opened
+        if (notificationIcon) {
+            // Function to check if device is mobile
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+
+            // Handle notification icon click
+            notificationIcon.addEventListener('click', function(e) {
+                e.stopPropagation();
+                
+                // On mobile, redirect to notifications page
+                if (isMobile()) {
+                    window.location.href = 'https://sparkx1.pro/user/dashboard/notifications';
+                    return;
+                }
+                
+                // On desktop, toggle dropdown panel
+                if (notificationPanel) {
+                    const isActive = notificationPanel.classList.contains('active');
+                    notificationPanel.classList.toggle('active');
+                    
+                    // Load notifications when opening panel
+                    if (!isActive) {
+                        loadNotifications();
+                    }
+                }
+            });
+
+            // Desktop-only: Close notification panel when clicking outside
+            if (notificationPanel) {
+                document.addEventListener('click', function(e) {
+                    if (!isMobile()) {
+                        const isClickInside = notificationPanel.contains(e.target) || notificationIcon.contains(e.target);
+                        if (!isClickInside && notificationPanel.classList.contains('active')) {
+                            notificationPanel.classList.remove('active');
+                        }
+                    }
+                });
+
+                // Desktop-only: Close notification panel on escape key
+                document.addEventListener('keydown', function(e) {
+                    if (!isMobile() && e.key === 'Escape' && notificationPanel.classList.contains('active')) {
+                        notificationPanel.classList.remove('active');
+                    }
+                });
+            }
+        }
+
+        // Load notifications from API
+        function loadNotifications() {
+            if (!notificationPanelBody) return;
+            
+            notificationPanelBody.innerHTML = '<div class="notification-loading" style="text-align: center; padding: 1rem; color: var(--text-secondary);"><i class="fas fa-spinner fa-spin"></i> Loading...</div>';
+            
+            fetch('https://sparkx1.pro/user/dashboard/notifications?ajax=1', {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.success || !data.notifications || data.notifications.length === 0) {
+                        notificationPanelBody.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);">No notifications</div>';
+                        return;
+                    }
+                    
+                    // Get first 5 notifications
+                    let htmlContent = '';
+                    data.notifications.slice(0, 5).forEach(notification => {
+                        const isUnread = !notification.is_read;
+                        
+                        htmlContent += `
+                            <div class="notification-item ${isUnread ? 'unread' : ''}" data-notification-id="${notification.id}" onclick="markNotificationAsRead(${notification.id})">
+                                <div class="notification-icon-wrapper">
+                                    <i class="fas fa-bell"></i>
+                                    ${isUnread ? '<span class="notification-dot"></span>' : ''}
+                                </div>
+                                <div class="notification-content">
+                                    <div class="notification-greeting">${notification.title}</div>
+                                    <div class="notification-message">${notification.message}</div>
+                                    <div class="notification-time">${notification.created_at}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    notificationPanelBody.innerHTML = htmlContent;
+                })
+                .catch(error => {
+                    console.error('Error loading notifications:', error);
+                    notificationPanelBody.innerHTML = '<div style="text-align: center; padding: 2rem; color: var(--text-secondary);">Error loading notifications</div>';
+                });
+        }
+
+        // Load unread count
+        function loadUnreadCount() {
+            fetch('https://sparkx1.pro/user/dashboard/notifications/unread-count')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success && notificationBadge) {
+                        if (data.count > 0) {
+                            notificationBadge.textContent = data.count > 99 ? '99+' : data.count;
+                            notificationBadge.style.display = 'flex';
+                        } else {
+                            notificationBadge.style.display = 'none';
+                        }
+                    }
+                })
+                .catch(error => {
+                    console.error('Error loading unread count:', error);
+                });
+        }
+
+        // Mark notification as read
+        window.markNotificationAsRead = function(notificationId) {
+            fetch(`https://sparkx1.pro/user/dashboard/notifications//read/${notificationId}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': 'XOtZWocKBTv9B8Nh65Uu44Di75AdBWdt2ftrm31g'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const item = document.querySelector(`[data-notification-id="${notificationId}"]`);
+                    if (item) {
+                        item.classList.remove('unread');
+                        const dot = item.querySelector('.notification-dot');
+                        if (dot) dot.remove();
+                    }
+                    loadUnreadCount();
+                }
+            })
+            .catch(error => {
+                console.error('Error marking notification as read:', error);
+            });
+        };
+
+        // Refresh unread count every 30 seconds
+        setInterval(loadUnreadCount, 30000);
+    });
+</script>
+<script src="https://sparkx1.pro/assets/dashboard/js/dashboard.js"></script>
+    <script src="https://sparkx1.pro/assets/dashboard/js/chat.js"></script>
+</body>
+</html>
